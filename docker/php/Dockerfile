@@ -21,12 +21,9 @@ RUN apt-get update && \
   localedef -f UTF-8 -i ja_JP ja_JP.UTF-8 && \
   mkdir /var/run/php-fpm && \
   docker-php-ext-install intl pdo_mysql zip bcmath && \
-  docker-php-ext-enable mailparse xdebug && \
   composer config -g process-timeout 3600 && \
   composer config -g repos.packagist composer https://packagist.org
 
 COPY ./docker/php/php.ini /usr/local/etc/php/php.ini
-COPY ./apache/*.conf /etc/apache2/sites-enabled/
-COPY ./xdebug.ini $PHP_INI_DIR/conf.d/
 
 WORKDIR /var/www/html
